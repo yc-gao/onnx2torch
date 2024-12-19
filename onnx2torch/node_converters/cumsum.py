@@ -80,7 +80,7 @@ class OnnxCumSum(nn.Module, OnnxToTorchModule):  # pylint: disable=missing-docst
 def _(node: OnnxNode, graph: OnnxGraph) -> OperationConverterResult:  # pylint: disable=unused-argument
     node_attributes = node.attributes
     exclusive = bool(node_attributes.get('exclusive', 0))
-    reverse = bool(node_attributes.get('reverse', 1))
+    reverse = bool(node_attributes.get('reverse', 0))
 
     return OperationConverterResult(
         torch_module=OnnxCumSum(exclusive, reverse),

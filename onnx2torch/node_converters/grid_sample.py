@@ -22,8 +22,8 @@ def _(node: OnnxNode, graph: OnnxGraph) -> OperationConverterResult:
     node_attributes = node.attributes
     mode = node_attributes.get('mode', 'linear')
     padding_mode = node_attributes.get('padding_mode', 'zeros')
-    align_corners = node_attributes.get('align_corners', 0)
+    align_corners = node_attributes.get('align_corners', False)
     return OperationConverterResult(
-        torch_module=TorchGridSample(mode, padding_mode, align_corners),
+        torch_module=TorchGridSample(mode, padding_mode, bool(align_corners)),
         onnx_mapping=onnx_mapping_from_node(node=node),
     )
